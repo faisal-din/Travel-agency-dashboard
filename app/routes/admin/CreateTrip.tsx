@@ -34,7 +34,6 @@ export const loader = async () => {
 
 const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
   const countries = loaderData as Country[];
-
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState<TripFormData>({
@@ -45,13 +44,11 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
     duration: 0,
     groupType: '',
   });
-
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setLoading(true);
 
     if (
@@ -67,11 +64,10 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
     }
 
     if (formData.duration < 1 || formData.duration > 10) {
-      setError('Duration must be between 1 and 10');
+      setError('Duration must be between 1 and 10 days');
       setLoading(false);
       return;
     }
-
     const user = await account.get();
     if (!user.$id) {
       console.error('User not authenticated');
@@ -97,7 +93,7 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
       const result: CreateTripResponse = await response.json();
 
       if (result?.id) navigate(`/trips/${result.id}`);
-      else console.error('Failed to generate a trip');
+      else console.error('Failed to generate a trip:', result);
     } catch (error) {
       console.error('Error generating trip:', error);
     } finally {
