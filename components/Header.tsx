@@ -1,3 +1,4 @@
+import { ButtonComponent } from '@syncfusion/ej2-react-buttons';
 import { Link } from 'react-router';
 import { useLocation } from 'react-router';
 import { cn } from '~/lib/utils';
@@ -36,7 +37,7 @@ const Header = ({ title, description, ctaText, ctaUrl }: Props) => {
         </p>
       </article>
 
-      {/* {ctaText && ctaUrl && (
+      {ctaText && ctaUrl && (
         <Link to={ctaUrl}>
           <ButtonComponent
             type='button'
@@ -46,7 +47,7 @@ const Header = ({ title, description, ctaText, ctaUrl }: Props) => {
             <span className='p-16-semibold text-white'>{ctaText}</span>
           </ButtonComponent>
         </Link>
-      )} */}
+      )}
     </header>
   );
 };
