@@ -1,5 +1,5 @@
 import { ID, OAuthProvider, Query } from 'appwrite';
-import { account, database, appwriteConfig } from './client';
+import { database, appwriteConfig, account } from '~/appwrite/client';
 import { redirect } from 'react-router';
 
 export const getExistingUser = async (id: string) => {
@@ -84,7 +84,10 @@ export const logoutUser = async () => {
 export const getUser = async () => {
   try {
     const user = await account.get();
-    if (!user) return redirect('/sign-in');
+    if (!user) {
+      console.error('User not found');
+      return redirect('/sign-in');
+    }
 
     const { documents } = await database.listDocuments(
       appwriteConfig.databaseId,
@@ -114,7 +117,7 @@ export const getAllUsers = async (limit: number, offset: number) => {
 
     return { users, total };
   } catch (e) {
-    console.log('Error fetching all users');
+    console.log('Error fetching users');
     return { users: [], total: 0 };
   }
 };
