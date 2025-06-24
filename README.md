@@ -23,12 +23,12 @@ A modern travel agency platform with an admin dashboard and public site. Generat
 
 ## <a name="tech-stack">⚙️ Tech Stack</a>
 
-- Syncfusion
-- React Router v7 (framework mode)
-- Appwrite
-- Tailwind CSS
-- Vite
 - React 19
+- React Router v7 (framework mode)
+- Tailwind CSS
+- Appwrite
+- Syncfusion
+- Vite
 
 ## <a name="features">🔋 Features</a>
 
